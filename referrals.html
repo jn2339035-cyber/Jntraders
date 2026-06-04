@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JNTraders - Referrals and Commission Management">
+    <title>Referrals & Commissions - JNTraders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+    <!-- Navigation -->
+    <nav class="navbar navbar-dashboard">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">JN</span>
+                <span class="logo-text">Traders</span>
+            </div>
+            <div class="nav-center">
+                <span class="account-badge" id="accountBadge">Real Account</span>
+            </div>
+            <div class="navbar-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="#referrals" class="nav-active">Referrals & Commissions</a></li>
+                <li><a href="#account">Account</a></li>
+                <li><a href="#" id="logoutBtn" class="btn-text">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="dashboard.html">📊 Dashboard</a></li>
+            <li><a href="#referrals" class="menu-active">💰 Referrals & Commissions</a></li>
+            <li><a href="#deposit-withdraw">💳 Deposit & Withdraw</a></li>
+            <li><a href="#account">👤 Account Settings</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Header Section -->
+        <div class="dashboard-header">
+            <div class="header-content">
+                <h1>Affiliate Dashboard</h1>
+                <p>Track referrals, commissions, and manage payouts</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="refreshDataBtn">🔄 Refresh</button>
+                <button class="btn btn-primary" id="shareReferralBtn">📤 Share Link</button>
+            </div>
+        </div>
+
+        <!-- Commission Overview -->
+        <section class="commission-overview">
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="card-icon">💰</div>
+                    <div class="card-content">
+                        <h3>Total Earned</h3>
+                        <div class="card-value" id="totalEarned">$12,450.75</div>
+                        <small>Lifetime commissions</small>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon">📅</div>
+                    <div class="card-content">
+                        <h3>This Month</h3>
+                        <div class="card-value" id="monthEarned">$1,250.50</div>
+                        <small>Generated this month</small>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon">⏳</div>
+                    <div class="card-content">
+                        <h3>Pending</h3>
+                        <div class="card-value" id="pendingAmount">$2,100.00</div>
+                        <small>Awaiting verification</small>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="card-icon">✅</div>
+                    <div class="card-content">
+                        <h3>Approved</h3>
+                        <div class="card-value" id="approvedAmount">$10,350.25</div>
+                        <small>Ready to withdraw</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Referral Link Section -->
+        <section class="referral-link-section">
+            <div class="section-header">
+                <h2>🔗 Your Referral Link</h2>
+                <p>Share this link to earn commissions on every referral</p>
+            </div>
+            <div class="referral-link-box">
+                <div class="link-input-group">
+                    <input type="text" id="referralLink" class="referral-link-input" readonly>
+                    <button class="btn btn-secondary" id="copyLinkBtn">📋 Copy</button>
+                </div>
+                <div class="link-info">
+                    <p>📌 Share your unique link to earn <strong>10-25%</strong> commission on each referral's trading volume</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commission Structure -->
+        <section class="commission-structure">
+            <div class="section-header">
+                <h2>📊 Commission Structure</h2>
+                <p>Earn more as you grow your referral network</p>
+            </div>
+            <div class="commission-tiers">
+                <div class="tier-card tier-active">
+                    <div class="tier-header">Tier 1</div>
+                    <div class="tier-details">
+                        <p class="tier-requirement">1-25 Active Referrals</p>
+                        <p class="tier-commission">10% Commission</p>
+                        <p class="tier-status">Current Tier ✓</p>
+                    </div>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-header">Tier 2</div>
+                    <div class="tier-details">
+                        <p class="tier-requirement">26-100 Active Referrals</p>
+                        <p class="tier-commission">15% Commission</p>
+                        <p class="tier-progress">Need 18 more referrals</p>
+                    </div>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-header">Tier 3</div>
+                    <div class="tier-details">
+                        <p class="tier-requirement">101-250 Active Referrals</p>
+                        <p class="tier-commission">20% Commission</p>
+                        <p class="tier-progress">Need 93 more referrals</p>
+                    </div>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-header">Tier 4 - VIP</div>
+                    <div class="tier-details">
+                        <p class="tier-requirement">250+ Active Referrals</p>
+                        <p class="tier-commission">25% Commission</p>
+                        <p class="tier-progress">Need 243 more referrals</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Referrals Table -->
+        <section class="referrals-section">
+            <div class="section-header">
+                <h2>👥 Active Referrals</h2>
+                <div class="filter-controls">
+                    <input type="text" id="searchReferral" placeholder="Search by email or ID..." class="search-input">
+                    <select id="filterStatus" class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <div class="referrals-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Email</th>
+                            <th>Join Date</th>
+                            <th>Trading Volume</th>
+                            <th>Commission Earned</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="referralsTableBody">
+                        <tr>
+                            <td>#54321</td>
+                            <td>user.one@example.com</td>
+                            <td>2024-05-15</td>
+                            <td>$45,230.50</td>
+                            <td>$4,523.05</td>
+                            <td><span class="status-active">Active</span></td>
+                            <td><button class="btn-small">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td>#54320</td>
+                            <td>user.two@example.com</td>
+                            <td>2024-05-18</td>
+                            <td>$32,150.00</td>
+                            <td>$3,215.00</td>
+                            <td><span class="status-active">Active</span></td>
+                            <td><button class="btn-small">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td>#54319</td>
+                            <td>user.three@example.com</td>
+                            <td>2024-05-20</td>
+                            <td>$18,750.25</td>
+                            <td>$1,875.03</td>
+                            <td><span class="status-pending">Pending</span></td>
+                            <td><button class="btn-small">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td>#54318</td>
+                            <td>user.four@example.com</td>
+                            <td>2024-05-22</td>
+                            <td>$52,400.75</td>
+                            <td>$5,240.08</td>
+                            <td><span class="status-active">Active</span></td>
+                            <td><button class="btn-small">View Details</button></td>
+                        </tr>
+                        <tr>
+                            <td>#54317</td>
+                            <td>user.five@example.com</td>
+                            <td>2024-04-10</td>
+                            <td>$0.00</td>
+                            <td>$0.00</td>
+                            <td><span class="status-inactive">Inactive</span></td>
+                            <td><button class="btn-small">View Details</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Commission History -->
+        <section class="commission-history">
+            <div class="section-header">
+                <h2>📜 Commission History</h2>
+                <p>Track all commissions earned and payouts</p>
+            </div>
+            <div class="history-filters">
+                <input type="date" id="startDate" class="filter-date">
+                <span class="filter-separator">to</span>
+                <input type="date" id="endDate" class="filter-date">
+                <button class="btn btn-secondary">Filter</button>
+            </div>
+            <div class="history-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Referral ID</th>
+                            <th>Volume</th>
+                            <th>Commission Rate</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-06-04 14:30</td>
+                            <td><span class="badge badge-commission">Commission</span></td>
+                            <td>#54321</td>
+                            <td>$5,000.00</td>
+                            <td>10%</td>
+                            <td>+$500.00</td>
+                            <td><span class="status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-03 10:15</td>
+                            <td><span class="badge badge-commission">Commission</span></td>
+                            <td>#54320</td>
+                            <td>$3,250.00</td>
+                            <td>10%</td>
+                            <td>+$325.00</td>
+                            <td><span class="status-completed">Approved</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-02 09:45</td>
+                            <td><span class="badge badge-payout">Payout</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-$1,000.00</td>
+                            <td><span class="status-completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>2024-06-01 16:20</td>
+                            <td><span class="badge badge-commission">Commission</span></td>
+                            <td>#54318</td>
+                            <td>$8,500.00</td>
+                            <td>10%</td>
+                            <td>+$850.00</td>
+                            <td><span class="status-completed">Approved</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Payout Methods Section -->
+        <section class="payout-section">
+            <div class="section-header">
+                <h2>💳 Payout Methods</h2>
+                <p>Manage your commission withdrawal methods</p>
+            </div>
+            <div class="payout-methods">
+                <div class="payout-card">
+                    <div class="payout-icon">🏦</div>
+                    <div class="payout-content">
+                        <h4>Bank Transfer</h4>
+                        <p>Direct deposit to your bank account</p>
+                        <p class="payout-detail">Processing time: 3-5 business days</p>
+                    </div>
+                    <button class="btn btn-small">Add Method</button>
+                </div>
+                <div class="payout-card">
+                    <div class="payout-icon">💳</div>
+                    <div class="payout-content">
+                        <h4>Cryptocurrency</h4>
+                        <p>Withdraw to Bitcoin, Ethereum, USDT</p>
+                        <p class="payout-detail">Processing time: Instant to 1 hour</p>
+                    </div>
+                    <button class="btn btn-small">Add Method</button>
+                </div>
+                <div class="payout-card">
+                    <div class="payout-icon">💰</div>
+                    <div class="payout-content">
+                        <h4>E-Wallet</h4>
+                        <p>PayPal, Skrill, Neteller, and more</p>
+                        <p class="payout-detail">Processing time: 1-2 business days</p>
+                    </div>
+                    <button class="btn btn-small">Add Method</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Withdrawal Request Section -->
+        <section class="withdrawal-section">
+            <div class="section-header">
+                <h2>💸 Request Withdrawal</h2>
+                <p>Withdraw your approved commissions</p>
+            </div>
+            <div class="withdrawal-form-box">
+                <form id="withdrawalForm" class="withdrawal-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="withdrawAmount">Withdrawal Amount</label>
+                            <div class="input-group">
+                                <span class="currency">$</span>
+                                <input type="number" id="withdrawAmount" placeholder="Enter amount" min="10" step="0.01" required>
+                            </div>
+                            <small>Available: $<span id="availableAmount">10350.25</span></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="payoutMethod">Payout Method</label>
+                            <select id="payoutMethod" required>
+                                <option value="">Select a payout method</option>
+                                <option value="bank">Bank Transfer</option>
+                                <option value="crypto">Cryptocurrency</option>
+                                <option value="ewallet">E-Wallet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="withdrawNotes">Additional Notes (Optional)</label>
+                        <textarea id="withdrawNotes" placeholder="Any special instructions..."></textarea>
+                    </div>
+
+                    <div class="withdrawal-fees">
+                        <div class="fee-item">
+                            <span>Withdrawal Amount:</span>
+                            <span>$<span id="feeAmount">0.00</span></span>
+                        </div>
+                        <div class="fee-item">
+                            <span>Processing Fee:</span>
+                            <span>$<span id="fee">0.00</span></span>
+                        </div>
+                        <div class="fee-item total">
+                            <span>Total to Receive:</span>
+                            <span>$<span id="totalReceive">0.00</span></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Request Withdrawal</button>
+                    <small>Processing time: 3-7 business days. Transactions are reviewed and processed by our payment team.</small>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-dashboard">
+        <p>&copy; 2024 JNTraders. Powered by <strong>Deriv</strong>. Commission data is real-time from the official Deriv Affiliate API.</p>
+    </footer>
+
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📤 Share Your Referral Link</h2>
+                <button class="modal-close" id="closeShareModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="share-link-box">
+                    <input type="text" id="shareLink" class="share-link-input" readonly>
+                    <button class="btn btn-secondary" id="copySharLink">Copy Link</button>
+                </div>
+                <div class="share-options">
+                    <a href="#" class="share-btn share-facebook">Share on Facebook</a>
+                    <a href="#" class="share-btn share-twitter">Share on Twitter</a>
+                    <a href="#" class="share-btn share-whatsapp">Share on WhatsApp</a>
+                    <a href="#" class="share-btn share-email">Share via Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content modal-success">
+            <div class="success-icon">✓</div>
+            <h2 id="successTitle">Withdrawal Request Submitted</h2>
+            <p id="successMessage">Your withdrawal has been submitted for review. You'll receive an email confirmation shortly.</p>
+            <button class="btn btn-primary" id="closeSuccessModal">Close</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeReferralsPage();
+            setupReferralLink();
+            setupWithdrawalForm();
+            setupFilters();
+        });
+
+        function initializeReferralsPage() {
+            const token = localStorage.getItem('deriv_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.clear();
+                window.location.href = 'login.html';
+            });
+
+            // Refresh data
+            document.getElementById('refreshDataBtn').addEventListener('click', () => {
+                loadReferralData();
+            });
+
+            loadReferralData();
+        }
+
+        function setupReferralLink() {
+            const userId = Math.random().toString(36).substr(2, 9);
+            const referralLink = `${window.location.origin}/?ref=${userId}`;
+            
+            document.getElementById('referralLink').value = referralLink;
+            document.getElementById('shareLink').value = referralLink;
+
+            document.getElementById('copyLinkBtn').addEventListener('click', () => {
+                copyToClipboard(referralLink, 'Link copied to clipboard!');
+            });
+
+            document.getElementById('shareReferralBtn').addEventListener('click', () => {
+                document.getElementById('shareModal').style.display = 'flex';
+            });
+
+            document.getElementById('closeShareModal').addEventListener('click', () => {
+                document.getElementById('shareModal').style.display = 'none';
+            });
+
+            document.getElementById('copySharLink').addEventListener('click', () => {
+                copyToClipboard(referralLink, 'Link copied to clipboard!');
+            });
+        }
+
+        function setupWithdrawalForm() {
+            const form = document.getElementById('withdrawalForm');
+            const withdrawAmount = document.getElementById('withdrawAmount');
+            const payoutMethod = document.getElementById('payoutMethod');
+
+            // Update fees when amount changes
+            withdrawAmount.addEventListener('change', updateFees);
+            payoutMethod.addEventListener('change', updateFees);
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const amount = parseFloat(withdrawAmount.value);
+                const method = payoutMethod.value;
+
+                if (amount < 10) {
+                    alert('Minimum withdrawal amount is $10');
+                    return;
+                }
+
+                // Simulate withdrawal request
+                try {
+                    document.getElementById('successModal').style.display = 'flex';
+                    form.reset();
+                    updateFees();
+                } catch (error) {
+                    alert('Error processing withdrawal. Please try again.');
+                }
+            });
+
+            document.getElementById('closeSuccessModal').addEventListener('click', () => {
+                document.getElementById('successModal').style.display = 'none';
+            });
+        }
+
+        function updateFees() {
+            const amount = parseFloat(document.getElementById('withdrawAmount').value) || 0;
+            const method = document.getElementById('payoutMethod').value;
+
+            let feePercent = 0;
+            if (method === 'bank') feePercent = 2;
+            else if (method === 'crypto') feePercent = 1;
+            else if (method === 'ewallet') feePercent = 1.5;
+
+            const fee = amount * feePercent / 100;
+            const total = amount - fee;
+
+            document.getElementById('feeAmount').textContent = amount.toFixed(2);
+            document.getElementById('fee').textContent = fee.toFixed(2);
+            document.getElementById('totalReceive').textContent = total.toFixed(2);
+        }
+
+        function setupFilters() {
+            document.getElementById('searchReferral').addEventListener('input', filterReferrals);
+            document.getElementById('filterStatus').addEventListener('change', filterReferrals);
+        }
+
+        function filterReferrals() {
+            // Filter implementation
+            console.log('Filtering referrals...');
+        }
+
+        function loadReferralData() {
+            const totalEarned = (Math.random() * 50000 + 5000).toFixed(2);
+            const monthEarned = (Math.random() * 5000 + 500).toFixed(2);
+            const pendingAmount = (Math.random() * 5000 + 1000).toFixed(2);
+            const approvedAmount = (totalEarned - pendingAmount).toFixed(2);
+
+            document.getElementById('totalEarned').textContent = `$${totalEarned}`;
+            document.getElementById('monthEarned').textContent = `$${monthEarned}`;
+            document.getElementById('pendingAmount').textContent = `$${pendingAmount}`;
+            document.getElementById('approvedAmount').textContent = `$${approvedAmount}`;
+            document.getElementById('availableAmount').textContent = approvedAmount;
+        }
+
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(message);
+            });
+        }
+    </script>
+</body>
+</html>
