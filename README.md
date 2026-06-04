@@ -5,8 +5,8 @@
 ![Platform](https://img.shields.io/badge/platform-Web-orange)
 
 A modern, professional trading affiliate platform built with HTML5, CSS3, and JavaScript. **JNTraders** integrates with official Deriv APIs to provide real-time market data, commission tracking, and comprehensive affiliate management tools.
-https://github.com/jn2339035-cyber/JNTraders/settings/pages
-## 🌟 Features
+https://github.com/jn2339035-cyber/JNTraders/settings
+<a href="/Jntraders/login.html" class="btn-primary">Sign In</a>
 
 ### Trading & Market Access
 - ✅ **Official Deriv Integration** - Seamless OAuth2 authentication with Deriv accounts
@@ -26,7 +26,7 @@ https://github.com/jn2339035-cyber/JNTraders/settings/pages
 
 ### Account Management
 - ✅ **Secure Authentication** - OAuth2 with official Deriv
-- ✅ **Account Settings** - Manage profile, security, and preferences
+  <link rel="stylesheet" href="/Jntraders/style.css">
 - ✅ **Deposit & Withdrawal** - Multiple payment methods (Card, Bank, Crypto, E-Wallet)
 - ✅ **Transaction History** - Track all deposits, withdrawals, and commissions
 - ✅ **Real-time Balance** - Live account balance updates
