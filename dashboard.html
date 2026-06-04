@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JNTraders - Trading Dashboard">
+    <title>Trading Dashboard - JNTraders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+    <!-- Navigation -->
+    <nav class="navbar navbar-dashboard">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">JN</span>
+                <span class="logo-text">Traders</span>
+            </div>
+            <div class="navbar-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="referrals.html">Affiliate</a></li>
+                <li><a href="#account">Account</a></li>
+                <li><a href="#" id="logoutBtn" class="btn-text">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="sidebar-close" id="sidebarClose">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#overview" class="nav-item active" data-section="overview">
+                <span class="icon">📊</span>
+                <span>Overview</span>
+            </a>
+            <a href="#markets" class="nav-item" data-section="markets">
+                <span class="icon">📈</span>
+                <span>Markets</span>
+            </a>
+            <a href="#charts" class="nav-item" data-section="charts">
+                <span class="icon">📉</span>
+                <span>Charts</span>
+            </a>
+            <a href="#tools" class="nav-item" data-section="tools">
+                <span class="icon">🛠️</span>
+                <span>Tools</span>
+            </a>
+            <a href="#analysis" class="nav-item" data-section="analysis">
+                <span class="icon">🤖</span>
+                <span>AI Analysis</span>
+            </a>
+            <a href="referrals.html" class="nav-item">
+                <span class="icon">💰</span>
+                <span>Affiliate</span>
+            </a>
+            <a href="#account" class="nav-item" data-section="account">
+                <span class="icon">👤</span>
+                <span>Account</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Account Type Indicator -->
+        <div class="account-banner" id="accountBanner">
+            <div class="banner-content">
+                <span class="banner-icon">📘</span>
+                <span id="bannerText">Demo Account</span>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview" class="dashboard-section active">
+            <div class="section-header">
+                <h2>Dashboard Overview</h2>
+                <div class="header-actions">
+                    <button class="btn-icon" id="refreshBtn" title="Refresh Data">🔄</button>
+                    <button class="btn-icon" id="settingsBtn" title="Settings">⚙️</button>
+                </div>
+            </div>
+
+            <!-- Account Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Account Balance</h3>
+                        <span class="stat-badge">Real</span>
+                    </div>
+                    <div class="stat-value" id="balanceValue">$0.00</div>
+                    <div class="stat-change positive">↑ 2.5% today</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Open Positions</h3>
+                        <span class="stat-badge">Active</span>
+                    </div>
+                    <div class="stat-value" id="openPositions">0</div>
+                    <div class="stat-label">Active trades</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Total Profit/Loss</h3>
+                    </div>
+                    <div class="stat-value positive" id="totalPL">$0.00</div>
+                    <div class="stat-label">All time</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Win Rate</h3>
+                    </div>
+                    <div class="stat-value" id="winRate">0%</div>
+                    <div class="stat-label">Last 30 days</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <button class="action-btn" id="tradeBtn">
+                        <span class="action-icon">📱</span>
+                        <span>Open Trade</span>
+                    </button>
+                    <a href="referrals.html" class="action-btn">
+                        <span class="action-icon">💼</span>
+                        <span>View Affiliate</span>
+                    </a>
+                    <button class="action-btn" id="withdrawBtn">
+                        <span class="action-icon">💳</span>
+                        <span>Withdraw Funds</span>
+                    </button>
+                    <button class="action-btn" id="depositBtn">
+                        <span class="action-icon">💰</span>
+                        <span>Deposit Funds</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Trades -->
+            <div class="recent-trades">
+                <h3>Recent Trades</h3>
+                <div class="trades-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Market</th>
+                                <th>Type</th>
+                                <th>Entry</th>
+                                <th>Exit</th>
+                                <th>P/L</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentTradesBody">
+                            <tr>
+                                <td colspan="6" class="empty-state">No recent trades. Start trading to see your history here.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Markets Section -->
+        <section id="markets" class="dashboard-section">
+            <div class="section-header">
+                <h2>Markets</h2>
+                <input type="text" placeholder="Search markets..." class="search-input" id="marketSearch">
+            </div>
+
+            <div class="markets-grid" id="marketsGrid">
+                <!-- Markets will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section id="charts" class="dashboard-section">
+            <div class="section-header">
+                <h2>Charts & Technical Analysis</h2>
+                <div class="chart-controls">
+                    <select id="chartSymbol" class="form-control">
+                        <option value="EURUSD">EUR/USD</option>
+                        <option value="GBPUSD">GBP/USD</option>
+                        <option value="USDJPY">USD/JPY</option>
+                    </select>
+                    <select id="chartTimeframe" class="form-control">
+                        <option value="1m">1m</option>
+                        <option value="5m">5m</option>
+                        <option value="15m">15m</option>
+                        <option value="1h">1h</option>
+                        <option value="1d" selected>1d</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="mainChart"></canvas>
+            </div>
+
+            <div class="technical-indicators">
+                <h3>Technical Indicators</h3>
+                <div class="indicators-grid">
+                    <div class="indicator">
+                        <label>RSI (14)</label>
+                        <div class="indicator-value" id="rsiValue">50</div>
+                    </div>
+                    <div class="indicator">
+                        <label>MACD</label>
+                        <div class="indicator-value" id="macdValue">Neutral</div>
+                    </div>
+                    <div class="indicator">
+                        <label>Moving Average</label>
+                        <div class="indicator-value" id="maValue">$1.0850</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section id="tools" class="dashboard-section">
+            <div class="section-header">
+                <h2>Trading Tools</h2>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h3>📊 Risk Calculator</h3>
+                    <p>Calculate risk/reward ratios for your trades</p>
+                    <button class="btn btn-secondary">Open Tool</button>
+                </div>
+                <div class="tool-card">
+                    <h3>📈 Position Sizer</h3>
+                    <p>Determine optimal position sizes based on risk</p>
+                    <button class="btn btn-secondary">Open Tool</button>
+                </div>
+                <div class="tool-card">
+                    <h3>💹 Profit Calculator</h3>
+                    <p>Calculate potential profits on trades</p>
+                    <button class="btn btn-secondary">Open Tool</button>
+                </div>
+                <div class="tool-card">
+                    <h3>📋 Trade Journal</h3>
+                    <p>Track and analyze your trading performance</p>
+                    <button class="btn btn-secondary">Open Tool</button>
+                </div>
+                <div class="tool-card">
+                    <h3>🎯 Market Sentiment</h3>
+                    <p>View aggregate market sentiment analysis</p>
+                    <button class="btn btn-secondary">Open Tool</button>
+                </div>
+                <div class="tool-card">
+                    <h3>📱 Mobile Terminal</h3>
+                    <p>Trade on the go with our mobile app</p>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Analysis Section -->
+        <section id="analysis" class="dashboard-section">
+            <div class="section-header">
+                <h2>AI-Powered Market Analysis</h2>
+            </div>
+
+            <div class="ai-insights">
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <h3>Market Sentiment</h3>
+                        <span class="sentiment-badge bullish">Bullish</span>
+                    </div>
+                    <p>Strong bullish momentum detected across major currency pairs. Consider long positions on EUR/USD and GBP/USD.</p>
+                    <div class="confidence">
+                        <label>Confidence:</label>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 78%"></div>
+                        </div>
+                        <span>78%</span>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <h3>Trend Analysis</h3>
+                        <span class="trend-badge uptrend">Uptrend</span>
+                    </div>
+                    <p>USD/JPY is in a strong uptrend with multiple higher highs and higher lows. Potential continuation signals present.</p>
+                    <div class="confidence">
+                        <label>Confidence:</label>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%"></div>
+                        </div>
+                        <span>85%</span>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <h3>Support & Resistance</h3>
+                    </div>
+                    <div class="sr-levels">
+                        <div class="sr-level">
+                            <span>Resistance</span>
+                            <strong>$1.0950</strong>
+                        </div>
+                        <div class="sr-level">
+                            <span>Current</span>
+                            <strong>$1.0875</strong>
+                        </div>
+                        <div class="sr-level">
+                            <span>Support</span>
+                            <strong>$1.0750</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Section -->
+        <section id="account" class="dashboard-section">
+            <div class="section-header">
+                <h2>Account Management</h2>
+            </div>
+
+            <div class="account-grid">
+                <div class="account-card">
+                    <h3>Account Information</h3>
+                    <div class="account-info">
+                        <div class="info-row">
+                            <span class="label">Email:</span>
+                            <span class="value" id="accountEmail">user@example.com</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Account Type:</span>
+                            <span class="value" id="accountType">Demo</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Registration Date:</span>
+                            <span class="value" id="registrationDate">June 4, 2026</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Leverage:</span>
+                            <span class="value" id="leverage">1:100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-card">
+                    <h3>Account Security</h3>
+                    <div class="security-options">
+                        <button class="btn btn-secondary btn-full">Change Password</button>
+                        <button class="btn btn-secondary btn-full">Enable 2FA</button>
+                        <button class="btn btn-secondary btn-full">View Login History</button>
+                    </div>
+                </div>
+
+                <div class="account-card">
+                    <h3>Preferences</h3>
+                    <div class="preferences">
+                        <div class="pref-item">
+                            <label for="emailNotifications">Email Notifications</label>
+                            <input type="checkbox" id="emailNotifications" checked>
+                        </div>
+                        <div class="pref-item">
+                            <label for="priceAlerts">Price Alerts</label>
+                            <input type="checkbox" id="priceAlerts" checked>
+                        </div>
+                        <div class="pref-item">
+                            <label for="darkMode">Dark Mode</label>
+                            <input type="checkbox" id="darkMode" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-card danger-zone">
+                    <h3>⚠️ Danger Zone</h3>
+                    <p>Irreversible actions</p>
+                    <button class="btn btn-danger btn-full">Close Account</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Modal for Trade -->
+    <div class="modal" id="tradeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Open a Trade</h2>
+                <button class="modal-close" id="closeTradeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>To open a real trade, please visit your Deriv account directly.</p>
+                <p><strong>JNTraders</strong> displays your trades from Deriv but all trading must be done through the official Deriv platform.</p>
+                <a href="https://deriv.com" target="_blank" class="btn btn-primary btn-full">Go to Deriv Platform</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Dashboard Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeDashboard();
+            loadAccountInfo();
+            loadMarkets();
+            setupCharts();
+        });
+
+        function initializeDashboard() {
+            const token = localStorage.getItem('deriv_token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const isDemo = localStorage.getItem('is_demo') === 'true';
+            const accountBanner = document.getElementById('accountBanner');
+            const bannerText = document.getElementById('bannerText');
+            const accountType = document.getElementById('accountType');
+
+            if (isDemo) {
+                accountBanner.classList.add('demo');
+                bannerText.textContent = '📘 Demo Account - Practice Trading';
+                accountType.textContent = 'Demo';
+            } else {
+                accountBanner.classList.add('real');
+                bannerText.textContent = '💰 Real Account - Live Trading';
+                accountType.textContent = 'Real';
+            }
+        }
+
+        function loadAccountInfo() {
+            const email = localStorage.getItem('user_email') || 'user@example.com';
+            document.getElementById('accountEmail').textContent = email;
+        }
+
+        function loadMarkets() {
+            const marketsGrid = document.getElementById('marketsGrid');
+            const markets = [
+                { symbol: 'EUR/USD', price: 1.0875, change: 0.45 },
+                { symbol: 'GBP/USD', price: 1.2750, change: -0.25 },
+                { symbol: 'USD/JPY', price: 148.65, change: 0.85 },
+                { symbol: 'AUD/USD', price: 0.6580, change: -0.15 },
+                { symbol: 'USD/CHF', price: 0.8950, change: 0.30 },
+                { symbol: 'NZD/USD', price: 0.6050, change: 0.55 }
+            ];
+
+            marketsGrid.innerHTML = markets.map(market => `
+                <div class="market-card">
+                    <div class="market-header">
+                        <h4>${market.symbol}</h4>
+                        <span class="market-change ${market.change >= 0 ? 'positive' : 'negative'}">
+                            ${market.change >= 0 ? '↑' : '↓'} ${Math.abs(market.change).toFixed(2)}%
+                        </span>
+                    </div>
+                    <div class="market-price">${market.price.toFixed(4)}</div>
+                    <button class="btn btn-secondary btn-small">Trade</button>
+                </div>
+            `).join('');
+        }
+
+        function setupCharts() {
+            const canvas = document.getElementById('mainChart');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 400;
+
+            // Draw simple candlestick chart
+            const width = canvas.width;
+            const height = canvas.height;
+            const data = [
+                { open: 30, close: 35, high: 38, low: 28 },
+                { open: 35, close: 40, high: 42, low: 33 },
+                { open: 40, close: 38, high: 41, low: 36 },
+                { open: 38, close: 45, high: 46, low: 37 },
+                { open: 45, close: 50, high: 52, low: 44 }
+            ];
+
+            const candleWidth = width / (data.length * 2);
+            const padding = 40;
+
+            data.forEach((candle, index) => {
+                const x = padding + index * candleWidth * 2 + candleWidth / 2;
+                const maxValue = 60;
+
+                const openY = height - (candle.open / maxValue) * (height - padding);
+                const closeY = height - (candle.close / maxValue) * (height - padding);
+                const highY = height - (candle.high / maxValue) * (height - padding);
+                const lowY = height - (candle.low / maxValue) * (height - padding);
+
+                // Draw wick
+                ctx.strokeStyle = '#666';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(x, highY);
+                ctx.lineTo(x, lowY);
+                ctx.stroke();
+
+                // Draw body
+                ctx.fillStyle = candle.close >= candle.open ? '#00d084' : '#ff6b6b';
+                ctx.fillRect(
+                    x - candleWidth / 2,
+                    Math.min(openY, closeY),
+                    candleWidth,
+                    Math.abs(closeY - openY)
+                );
+                ctx.strokeStyle = candle.close >= candle.open ? '#00d084' : '#ff6b6b';
+                ctx.strokeRect(
+                    x - candleWidth / 2,
+                    Math.min(openY, closeY),
+                    candleWidth,
+                    Math.abs(closeY - openY)
+                );
+            });
+        }
+
+        // Sidebar Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = item.dataset.section;
+                if (section) {
+                    showSection(section);
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    document.getElementById('sidebar').classList.remove('active');
+                }
+            });
+        });
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.dashboard-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Trade Modal
+        document.getElementById('tradeBtn').addEventListener('click', () => {
+            document.getElementById('tradeModal').style.display = 'flex';
+        });
+
+        document.getElementById('closeTradeModal').addEventListener('click', () => {
+            document.getElementById('tradeModal').style.display = 'none';
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('deriv_token');
+            localStorage.removeItem('user_email');
+            localStorage.removeItem('user_type');
+            localStorage.removeItem('is_demo');
+            window.location.href = 'index.html';
+        });
+
+        // Mobile menu
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.add('active');
+        });
+
+        document.getElementById('sidebarClose').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.remove('active');
+        });
+
+        // Refresh button
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            loadMarkets();
+            setupCharts();
+        });
+    </script>
+</body>
+</html>
